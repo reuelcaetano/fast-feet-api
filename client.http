@@ -1,0 +1,184 @@
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZWMxZjQ2ZC05NWNhLTRlM2QtOTk3Yy02NmQ2ZDdiZTYxNmEiLCJyb2xlIjoiZGVsaXZlcnkiLCJpYXQiOjE3MzA5MjA1NDN9.bJNa-CXmfN44RlqbjK59f4Z27mlh4Owlctl7s8-jHxcQ_nbxGd1BOkh2qKX_ofDX9b78Y_NFN98yJ0Vcrs4IATp_kuJwuHFyD_SOZ7I4ZI1fq2nmKVu4ZUikwmIxM0LSxK9NH6I_ABYcyWfFxDf54uiMHoSV7xrhRvXa7ihrbniyYH4zJOboOJ7MAn9niHHOxVNL-8Yw4F2gJFBKIXUQRKgHTNeHkPIKyoNOC3gB0_r08UkhJpuzN3ue1WmGC3csI3t9wFpPlJ5xihaM6e9W3uYU1q7GJy17RBPy2LZnvjqRrt7UcE75fN5ROYfxx4l3LTyOxdTBwZHKOxo8O3o9DA
+
+# @name authenticate
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+  "cpf": "12345678918",
+  "password": "123"
+}
+
+###
+
+# @name create_user
+POST {{baseUrl}}/accounts
+Content-Type: application/json
+
+{
+  "cpf": "12345678918",
+  "password": "123",
+  "role": "delivery"
+}
+
+###
+
+# @name reset_password
+PATCH {{baseUrl}}/accounts
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "new_password": "456"
+}
+
+###
+
+# @name create_deliveryman
+POST {{baseUrl}}/deliverymen
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Bro"
+}
+
+###
+
+# @name update_deliveryman
+PUT {{baseUrl}}/deliverymen
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "43622632-7c05-4854-881f-84f9bc26d1b0",
+  "name": "Joe Smith",
+  "latitude": "5",
+  "longitude": "5"
+}
+
+###
+
+# @name update_deliveryman
+DELETE {{baseUrl}}/deliverymen
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "43622632-7c05-4854-881f-84f9bc26d1b0"
+}
+
+###
+
+# @name create_recipient
+POST {{baseUrl}}/recipients
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Nae"
+}
+
+###
+
+# @name update_recipient
+PUT {{baseUrl}}/recipients
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "41fc2b41-0f25-440b-9c54-c0f07ceed240",
+  "name": "Jane Smith"
+}
+
+###
+
+# @name delete_recipient
+DELETE {{baseUrl}}/recipients
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "4ff20576-8b88-4081-858c-f922d344ff0f"
+}
+
+###
+
+# @name get_packets
+GET {{baseUrl}}/packets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name create_packet
+POST {{baseUrl}}/packets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "longitude": "0",
+  "latitude": "0",
+  "imageId": "image",
+  "recipientId": "6d7af206-a726-49c7-9c10-dc8a079d763a"
+}
+
+###
+
+# @name update_packet
+PUT {{baseUrl}}/packets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "56c9fc6c-878e-42f6-94f0-fd9c4d86fe2a",
+  "longitude": "2",
+  "latitude": "2",
+  "imageId": "imagez",
+  "recipientId": "41fc2b41-0f25-440b-9c54-c0f07ceed240"
+}
+
+###
+
+# @name delete_packet
+DELETE {{baseUrl}}/packets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "26b15b61-80b2-4c73-8d10-9f126fe1eb66"
+}
+
+###
+
+# @name load_packet
+PATCH {{baseUrl}}/packets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "ccf6183c-36bc-416f-81d5-1925e7de2a38",
+  "deliveryManId": "bb4436fb-9f13-4cc5-b824-07f801430a5b"
+}
+
+###
+
+# @name packet_available
+PATCH {{baseUrl}}/packets/adccadac-4558-4c90-96a8-711d2d0d3b8e/available
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name packet_delivery
+PATCH {{baseUrl}}/packets/ccf6183c-36bc-416f-81d5-1925e7de2a38/delivery
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name packet_return
+PATCH {{baseUrl}}/packets/adccadac-4558-4c90-96a8-711d2d0d3b8e/return
+Content-Type: application/json
+Authorization: Bearer {{token}}
